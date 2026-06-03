@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Inisialisasi aplikasi FastAPI
-app = FastAPI(title="")
+app = FastAPI(title="Smart Insect Identifier API")
 
 # Konfigurasi CORS agar frontend dapat mengakses API
 app.add_middleware(
@@ -21,12 +21,13 @@ app.add_middleware(
 )
 
 # Inisialisasi kebutuhan model klasifikasi
+model_path = os.path.join(os.path.dirname(__file__), "artifacts", "best_model.keras")
 classifier = InsectClassifier(
-    model_path=""
+    model_path=model_path
 )
 
 # Inisialisasi layanan Gemini AI
-gemini_expert = # dapatkan API Key
+gemini_expert = GeminiExpert(api_key=os.getenv("GEMINI_API_KEY"))
 
 @app.post("/analyze")
 async def analyze_image(file: UploadFile = File(...)):
@@ -38,13 +39,13 @@ async def analyze_image(file: UploadFile = File(...)):
     try:
         
         # Membaca file gambar
-        image_bytes = 
+        image_bytes = await file.read()
 
         # Prediksi jenis serangga menggunakan model ML
-        predictions = 
+        predictions = classifier.predict(image_bytes, top_k=3)
         
         # Mengambil hasil prediksi terbaik
-        top_prediction = 
+        top_prediction = predictions[0]["class_name"]
         
         # Mengambil informasi detail dari Gemini AI
         try:
