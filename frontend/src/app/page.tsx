@@ -104,7 +104,7 @@ export default function DashboardPage() {
             <h3 className="font-label-md text-[14px] text-on-surface-variant">Model Accuracy</h3>
           </div>
           <div className="flex items-baseline gap-2">
-            <span className="font-headline-lg text-[32px] font-semibold text-on-surface">72.0%</span>
+            <span className="font-headline-lg text-[32px] font-semibold text-on-surface">80.0%</span>
             <span className="font-label-sm text-[12px] text-on-surface-variant">Avg F1: 0.62</span>
           </div>
         </GlassCard>
