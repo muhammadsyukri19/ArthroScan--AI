@@ -45,7 +45,8 @@ export default function ScannerPage() {
     formData.append('file', image);
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/analyze', {
+      const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000';
+      const response = await fetch(`${apiBaseUrl}/analyze`, {
         method: 'POST',
         body: formData,
       });

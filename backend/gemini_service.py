@@ -9,25 +9,29 @@ class GeminiExpert:
 
     def get_insect_info(self, insect_name: str) -> str:
         prompt = f"""
-        Berdasarkan hasil identifikasi gambar, serangga ini adalah "{insect_name}".
-        Tolong berikan informasi detail dengan format yang rapi dan menarik:
-        - Nama Ilmiah:
-        - Nama Umum:
-        - Spesies:
-        - Genus:
-        - Famili:
-        - Habitat:
-        - Fun Fact: (Berikan 1 atau 2 fakta unik yang jarang diketahui)
+        Berdasarkan hasil identifikasi gambar, serangga ini terdeteksi sebagai: "{insect_name}".
         
-        Berikan jawaban langsung tanpa basa-basi pengantar.
+        Tolong berikan informasi taksonomi secara ringkas, padat, dan jelas menggunakan format poin-poin (bullet list) untuk menghemat ruang. Jangan menggunakan paragraf yang panjang.
+        Sertakan persis informasi berikut dengan format Markdown:
+        
+        *   **Nama Ilmiah:** 
+        *   **Nama Umum:** 
+        *   **Genus & Spesies:** 
+        *   **Famili & Ordo:** 
+        *   **Habitat:** (Maksimal 1-2 kalimat pendek)
+        *   **Dampak Lingkungan/Pertanian:** (Hama/predator/penyerbuk? Maksimal 1-2 kalimat pendek)
+        *   **Fun Fact:** (1 fakta paling unik secara singkat)
+        
+        Berikan jawaban langsung, hindari spasi baris ganda (double spasi) berlebihan, dan tanpa basa-basi pengantar/penutup.
         """
         
         # Menyiapkan konten input untuk model AI
         contents = [types.Content(role="user", parts=[types.Part.from_text(text=prompt)])]
                 
-        # Konfigurasi proses generasi AI
+        # Konfigurasi proses generasi AI dengan Google Search Grounding
         generate_content_config = types.GenerateContentConfig(
-            temperature=0.7
+            temperature=0.7,
+            tools=[{"google_search": {}}]
         )
         
         # Menghasilkan respons secara streaming

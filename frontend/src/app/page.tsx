@@ -1,10 +1,24 @@
 'use client';
 import Link from 'next/link';
 import GlassCard from '@/components/ui/GlassCard';
-
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
 
 export default function DashboardPage() {
+  const [todayScans, setTodayScans] = useState(0);
+
+  useEffect(() => {
+    const historyData = sessionStorage.getItem('arthroscan_history');
+    if (historyData) {
+      try {
+        const history = JSON.parse(historyData);
+        setTodayScans(history.length);
+      } catch (e) {
+        console.error(e);
+      }
+    }
+  }, []);
+
   return (
     <main className="max-w-desktop-max mx-auto px-container-padding pt-32 pb-20">
       {/* Top Section / Hero Intro */}
@@ -58,6 +72,7 @@ export default function DashboardPage() {
                 src="/hero-visual.png" 
                 alt="ArthroScan AI Neural Scan Visualization"
                 fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 45vw"
                 className="object-cover object-center"
               />
               <div className="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-background/90 via-background/20 to-transparent"></div>
@@ -91,9 +106,9 @@ export default function DashboardPage() {
             <h3 className="font-label-md text-[14px] text-on-surface-variant">Today&apos;s Scans</h3>
           </div>
           <div className="flex items-baseline gap-2">
-            <span className="font-headline-lg text-[32px] font-semibold text-on-surface">156</span>
+            <span className="font-headline-lg text-[32px] font-semibold text-on-surface">{todayScans}</span>
             <span className="font-label-sm text-[12px] text-secondary flex items-center">
-              <span className="material-symbols-outlined text-[14px]">trending_up</span> +4%
+              <span className="material-symbols-outlined text-[14px]">history</span> Session
             </span>
           </div>
         </GlassCard>
