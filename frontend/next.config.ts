@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
-  // Force new build trigger for Vercel deployment verification v2
+  // Trigger new build for Vercel deployment verification
 };
 
 export default nextConfig;

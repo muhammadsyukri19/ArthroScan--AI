@@ -108,3 +108,28 @@ insect-analyzer/
     ├── tailwind.config.ts   # Konfigurasi Styling
     └── package.json
 ```
+
+
+## 💡 Cara Cepat (Khusus Pengguna Windows)
+Sebagai alternatif yang lebih praktis, jika Anda menggunakan sistem operasi Windows, Anda tidak perlu menjalankan backend dan frontend secara terpisah secara manual.
+1. Pastikan Anda sudah menginstal dependensi (pip install dan 
+pm install).
+2. Cukup klik ganda (double-click) pada file **start.bat** yang ada di direktori utama proyek.
+3. Script otomatis akan menjalankan backend dan frontend secara bersamaan di terminal yang berbeda.
+
+## 🐳 Deployment (Docker)
+Proyek ini juga sudah mendukung *containerization* menggunakan Docker, khususnya untuk servis backend, sehingga siap di-deploy ke platform seperti Hugging Face Spaces atau server *cloud* Anda.
+`ash
+cd backend
+docker build -t insect-backend .
+docker run -p 7860:7860 insect-backend
+`
+
+## 📖 Cara Penggunaan Aplikasi
+1. Buka antarmuka aplikasi melalui browser di http://localhost:3000.
+2. Unggah gambar serangga (format JPG/PNG/WebP) dengan meng-klik atau *drag-and-drop* ke area yang disediakan.
+3. Tunggu beberapa detik, sistem akan melakukan inferensi menggunakan model PyTorch, kemudian memanggil Google Gemini AI.
+4. Nikmati wawasan dan insight menarik mengenai spesies tersebut yang disajikan dalam UI yang bersih dan responsif!
+
+## 📝 Lisensi
+Proyek ini dibuat untuk keperluan akademik dan pembelajaran (Ujian Akhir Semester Praktikum Machine Learning). Silakan pelajari dan kembangkan lebih lanjut!
